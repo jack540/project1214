@@ -1309,14 +1309,14 @@ function init() {
 
 	gcontrol = {
 		μ: 0.1,//0.5
-		ε: 0.0,//0.3
+		ε: 0.1,//0.3
 	};
 	
 	var gui = new dat.GUI();
 	gui.domElement.id = 'gui';
 	
 	gui.add(gcontrol, 'μ', 0.0, 0.4);	//摩擦力=正向力x摩擦係數
-	gui.add(gcontrol, 'ε', 0.0, 0.6); //外力=彈力係數X伸長量 F=k*△x
+	gui.add(gcontrol, 'ε', 0.0, 0.5); //外力=彈力係數X伸長量 F=k*△x
 
 }
 
