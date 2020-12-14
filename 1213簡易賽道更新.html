@@ -354,7 +354,7 @@ class Car {
 		
 		scene.add(this.light,this.light1,this.light2,this.light3);
 		
-		this.pos = new THREE.Vector3(110, 2, 150);
+		this.pos = new THREE.Vector3(60, 2, 150);
 		this.vel = new THREE.Vector3();
 		this.force = new THREE.Vector3();
 		
@@ -410,9 +410,9 @@ class Car {
 			//clone()
 			k = 0;
 		}
-		if (walls1[k].name == 'Straight' || walls1[k].name == 'StraightUpDown') { //判斷直道
+		if (walls[k].name == 'Straight' || walls[k].name == 'StraightUpDown') { //判斷直道
 		
-			if(walls1[k].name == 'StraightUpDown'){
+			if(walls[k].name == 'StraightUpDown'){
 			
 				var Zvect = new THREE.Vector3(this.vel.x ,0 ,0);	//水平分量
 				var Xvect = new THREE.Vector3(0 ,0 ,this.vel.z);	//垂直分量
@@ -426,15 +426,15 @@ class Car {
 		
 			let n = k;
 			let dis3 = new THREE.Vector3();
-			dis3 = carFrontPos.clone().sub(walls1[k].startLine).dot(walls1[k].hat);
+			dis3 = carFrontPos.clone().sub(walls[k].startLine).dot(walls[k].hat);
 			
-			if (walls1[k].startLine.distanceTo(walls1[k].endLine) <= dis3) k++;
+			if (walls[k].startLine.distanceTo(walls[k].endLine) <= dis3) k++;
 			
 			if(n == k) {
 			
 			for(let j = 0; j < 2; j++){
 			
-			var wall = walls1[k].children[j];
+			var wall = walls[k].children[j];
 			
 			let dis = rightTop.clone().sub (wall.point).dot (wall.normal);
 			
@@ -502,7 +502,7 @@ class Car {
 				scene.remove(dot);
 			}
 			
-			wall = walls1[k].children[j];
+			wall = walls[k].children[j];
 			
 			dis = leftTop.clone().sub (wall.point).dot (wall.normal);
 			
@@ -568,10 +568,10 @@ class Car {
 			}
 		}
 		}
-		else if (walls1[k].name == 'Curve' || walls1[k].name == 'BigCurve'){ //判斷彎道
+		else if (walls[k].name == 'Curve' || walls[k].name == 'BigCurve'){ //判斷彎道
 			
 			let B=0;
-			if(walls1[k].name == 'BigCurve') B=50;
+			if(walls[k].name == 'BigCurve') B=50;
 			
 			
 			let n = k;
@@ -582,12 +582,12 @@ class Car {
 			let endX = new THREE.Vector3();
 			let endZ = new THREE.Vector3();
 			
-			radiusX = walls1[k].radius.dot(new THREE.Vector3(1, 0, 0));
-			radiusZ = walls1[k].radius.dot(new THREE.Vector3(0, 0, 1));
-			startX = walls1[k].startCurve.dot(new THREE.Vector3(1, 0, 0));
-			startZ = walls1[k].startCurve.dot(new THREE.Vector3(0, 0, 1));
-			endX = walls1[k].endCurve.dot(new THREE.Vector3(1, 0, 0));
-			endZ = walls1[k].endCurve.dot(new THREE.Vector3(0, 0, 1));
+			radiusX = walls[k].radius.dot(new THREE.Vector3(1, 0, 0));
+			radiusZ = walls[k].radius.dot(new THREE.Vector3(0, 0, 1));
+			startX = walls[k].startCurve.dot(new THREE.Vector3(1, 0, 0));
+			startZ = walls[k].startCurve.dot(new THREE.Vector3(0, 0, 1));
+			endX = walls[k].endCurve.dot(new THREE.Vector3(1, 0, 0));
+			endZ = walls[k].endCurve.dot(new THREE.Vector3(0, 0, 1));
 			
 			let c1 = THREE.Math.radToDeg(Math.atan2(startZ - radiusZ, startX - radiusX));
 			let c2 = THREE.Math.radToDeg(Math.atan2(endZ - radiusZ, endX - radiusX));
@@ -604,14 +604,14 @@ class Car {
 				angle1 -= 270;
 			}
 			
-			if (angle1 > walls1[k].angle || angle1 < 0) {
+			if (angle1 > walls[k].angle || angle1 < 0) {
 				k++;
 			}
 
 			if(n == k){
 			for(let j = 0; j < 2; j++){
 			
-			let wall = walls1[k].children[j];
+			let wall = walls[k].children[j];
 			
 			if(wall.position.distanceTo( leftTop ) > 81+B || wall.position.distanceTo( leftTop ) < 39+B ){//左前導輪撞到右彎道
 				
@@ -681,7 +681,7 @@ class Car {
 				V.copy(VVV);
 				
 			}
-			wall = walls1[k].children[j];
+			wall = walls[k].children[j];
 			if(wall.position.distanceTo( rightTop ) > 81+B || wall.position.distanceTo( rightTop ) < 39+B){//右前導輪撞到左彎道
 				
 				co=1;
@@ -1239,8 +1239,8 @@ function init() {
 
 	}
 	
-	readModel('car',40);
-	readModel1('carn',40);
+	/*readModel('car',40);
+	readModel1('carn',40);*/
   ////////////////////////////////////////////////////////////////
   
 
@@ -1935,7 +1935,7 @@ function buildWall() {
 
 }
 
-function readModel (modelName, targetSize = 20) {
+/*function readModel (modelName, targetSize = 20) {
 
   var onProgress = function(xhr) {
     if (xhr.lengthComputable) {
@@ -2058,7 +2058,7 @@ function unitize1 (object1, targetSize1) {
 	theObject1.rotation.y = -Math.PI/2;
 	return theObject1;
 			
-}
+}*/
 
 
 ////////////////////////////////////////
